@@ -9,6 +9,11 @@ function Navbar() {
             Acasă
           </Link>
         </li>
+        <li>
+          <Link to="/categories" className="hover:text-gray-300">
+            Categorii
+          </Link>
+        </li>
         {/* Link-ul pentru Admin nu este inclus aici */}
       </ul>
     </nav>
