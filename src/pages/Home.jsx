@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { getBooks } from "../services/books";
+import Book from "../components/common/Book";
+import '../index.css';
 
 function Home() {
   const [books, setBooks] = useState([]);
@@ -7,29 +9,28 @@ function Home() {
   useEffect(() => {
     const fetchBooks = async () => {
       const booksData = await getBooks();
+      console.log("Books data:", booksData); // Log data
       setBooks(booksData);
     };
 
     fetchBooks();
   }, []);
 
+  console.log("Rendered books:", books); // Log books state
+
   return (
-    <div>
-      <h1 className="text-4xl font-bold mb-4">Cele mai noi cărți</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="pb-16 overflow-x-hidden" >
+      <h1 className="text-2xl md:text-4xl font-bold mb-8 text-light-2 text-center">
+        Pe acest site ai acces la peste 
+        <span className="relative inline-block mx-2">
+          <span className="gradient-text blur-effect">somerandomtextvoreffect</span>
+          <span className="clear-text">22 000 de cărți</span>
+        </span> 
+        în format electronic
+      </h1>
+      <div>
         {books.map((book) => (
-          <div key={book.id} className="border p-4 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-2">{book.carte}</h2>
-            <p className="text-gray-600">Format: {book.format}</p>
-            <a
-              href={book.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              Descarcă
-            </a>
-          </div>
+          <Book key={book.id} book={book} />
         ))}
       </div>
     </div>

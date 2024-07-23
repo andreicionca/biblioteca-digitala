@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-brand--1: #8ACA7A;
+  --color-brand--2: #FCD34D;
+
+  --color-dark--0: #1C212B;
+  --color-dark--1: #2A303C;
+  --color-dark--2: #31514F;
+  --color-light--1: #49555F;
+  --color-light--2: #B2CCD6;
+  --color-light--3: #FFFFFF;
+}
+
+body {
+  background-color: var(--color-dark--1);
+  color: var(--color-light--2);
+}
+
+@layer utilities {
+  .gradient-text {
+    background-image: linear-gradient(90deg, #f87171 0%, #fbbf24 25%, #34d399 50%, #3b82f6 75%, #a855f7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .blur-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(9px);
+    z-index: -1;
+  }
+  .clear-text {
+    position: relative;
+    z-index: 1;
+    background-image: linear-gradient(90deg, #f87171 0%, #fbbf24 25%, #34d399 50%, #3b82f6 75%, #bb89ea 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}

@@ -7,5 +7,7 @@ export async function getBooks() {
     console.error("Error fetching books:", error);
     return [];
   }
+
+  console.log("Fetched books:", data);
   return data;
 }
