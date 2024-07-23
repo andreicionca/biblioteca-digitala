@@ -1,9 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { getBooks } from "../services/books";
+import { useParams, useNavigate } from "react-router-dom";
+import { getBooksByCategory } from "../services/books";
 import Book from "../components/common/Book";
 import '../index.css';
 
-function Home() {
+function CategoryBooks() {
+  const { category } = useParams();
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -17,7 +20,10 @@ function Home() {
     setLoading(true);
 
     try {
-      const { books: newBooks, totalCount } = await getBooks(pageRef.current);
+      const { books: newBooks, totalCount } = await getBooksByCategory(category, pageRef.current);
+      if (pageRef.current * 3 >= totalCount) {
+        setHasMore(false);
+      }
       setBooks(prevBooks => {
         const uniqueBooks = newBooks.filter(newBook => 
           !prevBooks.some(prevBook => prevBook.id === newBook.id)
@@ -36,11 +42,11 @@ function Home() {
       setLoading(false);
       loadingRef.current = false;
     }
-  }, [hasMore,books.length]);
+  }, [category, hasMore, books.length]);
 
   useEffect(() => {
     fetchBooks();
-  }, []); // Empty dependency array to run only once on mount
+  }, [fetchBooks]);
 
   const handleScroll = useCallback(() => {
     const scrollThreshold = 1000;
@@ -61,28 +67,24 @@ function Home() {
 
   return (
     <div className="pb-16 overflow-x-hidden">
-      
-      <h1 className="text-3xl md:text-6xl font-bold mb-4 text-light-3 text-center">
-      Bun venit la <span className="relative inline-block mx-2">
-        <span className="gradient-text blur-effect">testformieffesct</span>
-        <span className="clear-text">biblioteca ta</span>
-      </span> digitală!
-    </h1>
-    <h1 className="text-2xl md:text-3xl font-bold mb-4 text-light-2 text-center">Descoperă un univers de cunoștințe și aventuri la un click distanță. </h1>
-    <p className="text-lg md:text-xl lg:text-2xl text-light-1 text-center mb-8">
-      Aici vei găsi peste {totalCount} de cărți în format electronic, gata să fie explorate. Fie că ești pasionat de ficțiune, non-ficțiune, 
-      știință sau artă, avem ceva pentru fiecare.
-    </p>
-    
+      <button
+        onClick={() => navigate(-1)}
+        className="bg-brand-1 text-dark-2 px-4 py-2 rounded mb-4"
+      >
+        Înapoi la categorii
+      </button>
+      <h1 className="text-2xl md:text-4xl font-bold mb-8 text-light-2 text-center">
+        Cărți din categoria: {category}
+      </h1>
       <div>
         {books.map((book) => (
           <Book key={book.id} book={book} />
         ))}
       </div>
       {loading && <p className="text-center">Încărcare...</p>}
-      {!hasMore && <p className="text-center">Toate cărțile ({totalCount}) au fost încărcate.</p>}
+      {!hasMore && <p className="text-center">Toate cărțile {totalCount} au fost încărcate.</p>}
     </div>
   );
 }
 
-export default Home;
+export default CategoryBooks;

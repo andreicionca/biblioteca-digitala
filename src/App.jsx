@@ -4,6 +4,7 @@ import Admin from "./pages/Admin";
 import Categories from "./pages/Categories";
 import Suggestions from "./pages/Suggestions";
 import Profile from "./pages/Profile";
+import CategoryBooks from "./pages/CategoryBooks"; // Importă noua pagină
 import Navbar from "./components/common/Navbar";
 import MobileNavbar from "./components/common/MobileNavbar";
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/:category" element={<CategoryBooks />} /> {/* Adaugă noua rută */}
           <Route path="/suggestions" element={<Suggestions />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>

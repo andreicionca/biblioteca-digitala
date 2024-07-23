@@ -1,13 +1,53 @@
 import supabase from "../supabaseClient";
 
-export async function getBooks() {
-  const { data, error } = await supabase.from("books").select("*");
+export async function getBooks(page = 1, limit = 3) {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from("books")
+    .select("*", { count: "exact" })
+    .order('id', { ascending: true })
+    .range(from, to);
 
   if (error) {
     console.error("Error fetching books:", error);
+    return { books: [], totalCount: 0 };
+  }
+
+  return { books: data, totalCount: count };
+}
+
+export async function getCategories() {
+  const { data, error } = await supabase
+    .from("books")
+    .select("categorie");
+
+  if (error) {
+    console.error("Error fetching categories:", error);
     return [];
   }
 
-  console.log("Fetched books:", data);
-  return data;
+  const uniqueCategories = [...new Set(data.map((item) => item.categorie))];
+  return uniqueCategories;
+}
+
+
+export async function getBooksByCategory(category, page = 1, limit = 3) {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from("books")
+    .select("*", { count: "exact" })
+    .eq('categorie', category)
+    .order('id', { ascending: true })
+    .range(from, to);
+
+  if (error) {
+    console.error("Error fetching books by category:", error);
+    return { books: [], totalCount: 0 };
+  }
+
+  return { books: data, totalCount: count };
 }

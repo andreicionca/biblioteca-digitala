@@ -5,8 +5,12 @@ function Navbar() {
   return (
     <nav className="bg-transparent p-4 justify-between items-center hidden md:flex pb-12">
       <div className="flex items-center space-x-2">
-        <img src={logo} alt="Logo" className="h-12 w-12" />
+      <Link to="/" >
+      <img src={logo} alt="Logo" className="h-12 w-12" />
+        </Link>
+       <Link to="/">
         <span className="text-2xl font-extrabold">Biblioteca Online</span>
+        </Link>
       </div>
       <div className="flex space-x-4">
         <Link to="/" className="hover:text-brand-1">
