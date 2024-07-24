@@ -19,6 +19,9 @@ function Navbar() {
         <Link to="/categories" className="hover:text-brand-1">
           Categorii
         </Link>
+        <Link to="/search" className="hover:text-brand-1">
+          Căutare cărți
+        </Link>
       </div>
     </nav>
   );
