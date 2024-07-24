@@ -21,17 +21,16 @@ export async function getBooks(page = 1, limit = 3) {
 export async function getCategories() {
   const { data, error } = await supabase
     .from("books")
-    .select("categorie");
+    .select("categories");
 
   if (error) {
     console.error("Error fetching categories:", error);
     return [];
   }
 
-  const uniqueCategories = [...new Set(data.map((item) => item.categorie))];
+  const uniqueCategories = [...new Set(data.map((item) => item.categories))];
   return uniqueCategories;
 }
-
 
 export async function getBooksByCategory(category, page = 1, limit = 3) {
   const from = (page - 1) * limit;
@@ -40,7 +39,7 @@ export async function getBooksByCategory(category, page = 1, limit = 3) {
   const { data, error, count } = await supabase
     .from("books")
     .select("*", { count: "exact" })
-    .eq('categorie', category)
+    .eq('categories', category)
     .order('id', { ascending: true })
     .range(from, to);
 

@@ -40,7 +40,7 @@ function Book({ book }) {
 
   return (
     <div className="w-full max-w-4xl mx-auto my-4 rounded-lg overflow-hidden border border-light-2 p-2 flex transition-transform transform hover:border-light-3 hover:shadow-xl">
-      <div className="w-32 h-48 flex-shrink-0">
+      <a href={book.link_view} target="_blank" rel="noopener noreferrer" className="w-32 h-48 flex-shrink-0">
         {!imageError ? (
           <img
             className="h-full w-full object-cover rounded-lg"
@@ -54,13 +54,13 @@ function Book({ book }) {
             <span className="text-gray-500">No Image</span>
           </div>
         )}
-      </div>
+      </a>
       <div className="pl-2 flex flex-col justify-between w-full">
         {/* Row 1 */}
         <div className="flex justify-between items-start mb-2">
-          <h2 className="text-sm md:text-lg lg:text-xl font-semibold text-light-2">
-            {book.carte}
-          </h2>
+          <a href={book.link_view} target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg lg:text-xl font-semibold text-light-2">
+            {book.book}
+          </a>
           <button className="text-brand-2">
             <HeartIcon className="h-5 w-5" />
           </button>
@@ -68,10 +68,10 @@ function Book({ book }) {
         {/* Row 2 */}
         <div className="flex justify-between items-center">
           <p className="text-xs md:text-md lg:text-lg text-light-1 w-1/2">
-            Format: <br />{book.format}
+            Format: {book.format}
           </p>
           <a
-            href={book.link}
+            href={book.link_download}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-brand-1 text-dark-2 px-2 py-1 rounded hover:bg-brand-2 hover:text-dark-2 text-center text-xs md:text-sm"
@@ -87,9 +87,10 @@ function Book({ book }) {
 Book.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    carte: PropTypes.string.isRequired,
+    book: PropTypes.string.isRequired,
     format: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
+    link_download: PropTypes.string.isRequired,
+    link_view: PropTypes.string.isRequired,
     id_cover: PropTypes.string.isRequired,
   }).isRequired,
 };

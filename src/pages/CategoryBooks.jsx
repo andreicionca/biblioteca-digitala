@@ -82,7 +82,7 @@ function CategoryBooks() {
         ))}
       </div>
       {loading && <p className="text-center">Încărcare...</p>}
-      {!hasMore && <p className="text-center">Toate cărțile {totalCount} au fost încărcate.</p>}
+      {!hasMore && <p className="text-center">Toate cele  {totalCount} cărți au fost încărcate.</p>}
     </div>
   );
 }
