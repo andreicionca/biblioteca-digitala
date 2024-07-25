@@ -29,7 +29,7 @@ function MobileNavbar() {
                 <HomeIcon
                   className={`h-4 w-4 ${isActive ? "text-light-2 fill-current" : "text-light-1"}`}
                 />
-                <span className={`text-sm ${isActive ? "text-white" : "text-light-1"}`}>
+                <span className={`text-sm ${isActive ? "text-light-2" : "text-light-1"}`}>
                   Acasă
                 </span>
               </>
@@ -41,7 +41,7 @@ function MobileNavbar() {
                 <BookOpenIcon
                   className={`h-4 w-4 ${isActive ? "text-light-2 fill-current" : "text-light-1"}`}
                 />
-                <span className={`text-sm ${isActive ? "text-white" : "text-light-1"}`}>
+                <span className={`text-sm ${isActive ? "text-light-2" : "text-light-1"}`}>
                   Categorii
                 </span>
               </>
@@ -53,7 +53,7 @@ function MobileNavbar() {
                 <MagnifyingGlassIcon
                   className={`h-4 w-4 ${isActive ? "text-light-2 fill-current" : "text-light-1"}`}
                 />
-                <span className={`text-sm ${isActive ? "text-white" : "text-light-1"}`}>
+                <span className={`text-sm ${isActive ? "text-light-2" : "text-light-1"}`}>
                   Căutare
                 </span>
               </>
@@ -65,7 +65,7 @@ function MobileNavbar() {
                 <LightBulbIcon
                   className={`h-4 w-4 ${isActive ? "text-light-2 fill-current" : "text-light-1"}`}
                 />
-                <span className={`text-sm ${isActive ? "text-white" : "text-light-1"}`}>
+                <span className={`text-sm ${isActive ? "text-light-2" : "text-light-1"}`}>
                   Sugestii
                 </span>
               </>

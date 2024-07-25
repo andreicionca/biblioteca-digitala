@@ -29,7 +29,7 @@ function Search() {
   };
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchTerm.length >= 3) {
       fetchBooks(replaceDiacritics(searchTerm));
     } else {
       setBooks([]);
@@ -44,9 +44,12 @@ function Search() {
           placeholder="Caută cărți..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(replaceDiacritics(e.target.value))}
-          className="border border-gray-300 rounded p-2 w-full max-w-lg"
+          className="border border-gray-300 rounded p-2 w-auto max-w-lg"
         />
       </div>
+      {searchTerm.length >= 3 && (
+        <p className="text-center mb-4">{books.length} rezultate găsite</p>
+      )}
       {loading ? (
         <p className="text-center">Încărcare...</p>
       ) : (
@@ -56,7 +59,7 @@ function Search() {
           ))}
         </div>
       )}
-      {!loading && books.length === 0 && searchTerm && (
+      {!loading && books.length === 0 && searchTerm && searchTerm.length >= 3 && (
         <p className="text-center">Nicio carte găsită pentru termenul &quot;{searchTerm}&quot;</p>
       )}
     </div>
