@@ -70,7 +70,7 @@ function Home() {
     </h1>
     <h1 className="text-2xl md:text-3xl font-bold mb-4 text-light-2 text-center">Descoperă un univers de cunoștințe și aventuri la un click distanță. </h1>
     <p className="text-lg md:text-xl lg:text-2xl text-light-1 text-center mb-8">
-      Aici vei găsi peste {totalCount} de cărți în format electronic, gata să fie explorate. Fie că ești pasionat de ficțiune, non-ficțiune, 
+      Aici vei găsi peste 20 000 de cărți în format electronic, gata să fie explorate. Fie că ești pasionat de ficțiune, non-ficțiune, 
       știință sau artă, avem ceva pentru fiecare.
     </p>
     

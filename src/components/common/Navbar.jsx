@@ -9,7 +9,7 @@ function Navbar() {
       <img src={logo} alt="Logo" className="h-12 w-12" />
         </Link>
        <Link to="/">
-        <span className="text-2xl font-extrabold">Biblioteca Online</span>
+        <span className="text-2xl font-extrabold">Biblioteca digitală</span>
         </Link>
       </div>
       <div className="flex space-x-4">

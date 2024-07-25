@@ -17,7 +17,7 @@ function MobileNavbar() {
             <img src={logo} alt="Logo" className="h-6 w-6" />
           </Link>
           <Link to="/">
-            <span className="text-base font-extrabold">Biblioteca Online</span>
+            <span className="text-base font-extrabold">Biblioteca digitală</span>
           </Link>
         </div>
       </nav>
