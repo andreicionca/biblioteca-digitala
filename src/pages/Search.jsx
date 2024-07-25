@@ -44,7 +44,7 @@ function Search() {
           placeholder="Caută cărți..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(replaceDiacritics(e.target.value))}
-          className="border border-gray-300 rounded p-2 w-auto max-w-lg"
+          className="border border-gray-300 rounded p-2 w-full max-w-lg"
         />
       </div>
       {searchTerm.length >= 3 && (
