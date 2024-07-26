@@ -26,7 +26,7 @@ function Categories() {
         {categories.map((category, index) => (
           <div
             key={index}
-            className="border p-1 h-20 flex items-center justify-center rounded-lg shadow-md cursor-pointer bg-dark-2 md:bg-light-3"
+            className="border p-1 h-20 flex items-center justify-center rounded-lg shadow-md cursor-pointer bg-dark-2 large:bg-dark2 md:bg-dark-2"
             onClick={() => handleCategoryClick(category)}
           >
             <h2 className="text-sm md:text-2xl font-semibold mb-2 text-center">{category}</h2>

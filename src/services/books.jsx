@@ -18,6 +18,8 @@ export async function getBooks(page = 1, limit = 3) {
   return { books: data, totalCount: count };
 }
 
+
+
 export async function getCategories() {
   const { data, error } = await supabase
     .from("books")
