@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getCategories } from "../services/books"; // Actualizăm importul
 
 function Categories() {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -14,16 +15,21 @@ function Categories() {
     fetchCategories();
   }, []);
 
+  const handleCategoryClick = (category) => {
+    navigate(`/categories/${category}`);
+  };
+
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-light-3">Categorii</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <h1 className="text-4xl font-bold mb-4 text-center text-light-3">Categorii</h1>
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {categories.map((category, index) => (
-          <div key={index} className="border p-4 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-2">{category}</h2>
-            <Link to={`/categories/${category}`} className="text-brand-1 hover:text-brand-2">
-              Vezi cărțile
-            </Link>
+          <div
+            key={index}
+            className="border p-1 h-20 flex items-center justify-center rounded-lg shadow-md cursor-pointer bg-dark-2 md:bg-light-3"
+            onClick={() => handleCategoryClick(category)}
+          >
+            <h2 className="text-sm md:text-2xl font-semibold mb-2 text-center">{category}</h2>
           </div>
         ))}
       </div>

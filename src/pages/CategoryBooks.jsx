@@ -74,7 +74,7 @@ function CategoryBooks() {
         Înapoi la categorii
       </button>
       <h1 className="text-2xl md:text-4xl font-bold mb-8 text-light-2 text-center">
-        Cărți din categoria: {category}
+        Cărți din categoria: <br /><span className="text-light-3">{category}</span>
       </h1>
       <div>
         {books.map((book) => (

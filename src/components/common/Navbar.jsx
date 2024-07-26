@@ -13,13 +13,13 @@ function Navbar() {
         </Link>
       </div>
       <div className="flex space-x-4">
-        <Link to="/" className="hover:text-brand-1">
+        <Link to="/" className="hover:text-brand-1 font-semibold">
           Acasă
         </Link>
-        <Link to="/categories" className="hover:text-brand-1">
+        <Link to="/categories" className="hover:text-brand-1 font-semibold">
           Categorii
         </Link>
-        <Link to="/search" className="hover:text-brand-1">
+        <Link to="/search" className="hover:text-brand-1 font-semibold">
           Căutare cărți
         </Link>
       </div>

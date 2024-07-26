@@ -16,6 +16,9 @@ module.exports = {
       fontFamily: {
         'figtree': ['Figtree', 'sans-serif'],
       },
+      fontSize: {
+        'xxs': '0.5rem', // Adaugă dimensiunea personalizată, de exemplu 10px
+      },
     },
   },
   variants: {},
