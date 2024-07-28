@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   HomeIcon,
   UserIcon,
@@ -9,18 +9,22 @@ import {
 import logo from "../../assets/logo.png";
 
 function MobileNavbar() {
+  const location = useLocation();
+
   return (
     <div className="md:hidden">
-      <nav className="fixed top-0 left-0 z-50 bg-dark-1 w-full p-3 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <Link to="/">
-            <img src={logo} alt="Logo" className="h-6 w-6" />
-          </Link>
-          <Link to="/">
-            <span className="text-base font-extrabold">Biblioteca digitală</span>
-          </Link>
-        </div>
-      </nav>
+      {location.pathname !== "/search" && (
+        <nav className="fixed top-0 left-0 z-50 bg-dark-1 w-full p-3 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <Link to="/">
+              <img src={logo} alt="Logo" className="h-6 w-6" />
+            </Link>
+            <Link to="/">
+              <span className="text-base font-extrabold">Biblioteca digitală</span>
+            </Link>
+          </div>
+        </nav>
+      )}
       <div className="fixed bottom-0 left-0 w-full bg-dark-1 text-light-2 shadow-lg z-50">
         <div className="flex justify-around py-2">
           <NavLink to="/" className="flex flex-col items-center p-2">
@@ -85,10 +89,9 @@ function MobileNavbar() {
           </NavLink>
         </div>
       </div>
-      {/* Adaugă un padding-top suficient pentru a compensa navbar-ul */}
+      {location.pathname !== "/search" && (
       <div className="pt-10">
-        {/* Conținutul principal al paginii tale aici */}
-      </div>
+      </div>)}
     </div>
   );
 }

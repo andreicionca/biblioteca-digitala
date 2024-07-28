@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { useState, useEffect, useRef } from 'react';
-import epubCover from '../../assets/epub.svg'; // Import the SVG
 
 function Book({ book }) {
   const [imageError, setImageError] = useState(false);
@@ -12,34 +11,32 @@ function Book({ book }) {
   };
 
   useEffect(() => {
-    if (book.format !== 'epub') {
-      const imgElement = imgRef.current;
-      const observer = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              img.src = img.dataset.src;
-              observer.unobserve(img);
-            }
-          });
-        },
-        {
-          rootMargin: '50px',
-        }
-      );
-
-      if (imgElement) {
-        observer.observe(imgElement);
+    const imgElement = imgRef.current;
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            observer.unobserve(img);
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
       }
+    );
 
-      return () => {
-        if (imgElement) {
-          observer.unobserve(imgElement);
-        }
-      };
+    if (imgElement) {
+      observer.observe(imgElement);
     }
-  }, [book.format]);
+
+    return () => {
+      if (imgElement) {
+        observer.unobserve(imgElement);
+      }
+    };
+  }, []);
 
   const getFormatButtonStyle = (format) => {
     switch (format) {
@@ -55,15 +52,9 @@ function Book({ book }) {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-4 rounded-lg overflow-hidden border border-light-2 p-2 flex transition-transform transform hover:border-light-3 hover:shadow-xl">
+    <div className=" w-full max-w-4xl mx-auto my-4 rounded-lg overflow-hidden border border-light-2 p-2 flex transition-transform transform hover:border-light-3 hover:shadow-xl">
       <a href={book.link_view} target="_blank" rel="noopener noreferrer" className="w-32 h-48 flex-shrink-0">
-        {book.format === 'EPUB' ? (
-          <img
-            className="w-full object-cover rounded-lg"
-            src={epubCover}
-            alt="EPUB Cover"
-          />
-        ) : !imageError ? (
+        {!imageError ? (
           <img
             className="h-full w-full object-cover rounded-lg"
             data-src={`https://drive.google.com/thumbnail?id=${book.id_cover}`}
@@ -80,13 +71,12 @@ function Book({ book }) {
       <div className="pl-2 flex flex-col justify-between w-full">
         {/* Row 1 */}
         <div className="flex justify-between items-start mb-2">
-            <a href={book.link_view} target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg lg:text-xl font-semibold text-light-2">
-              {book.book}
-              <span className={`ml-1 px-0.5 rounded text-white text-xs md:px-2 md:py-1 md:text-sm ${getFormatButtonStyle(book.format)}`}>
-                {book.format}
-              </span>
-            </a>
-      
+          <a href={book.link_view} target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg lg:text-xl font-semibold text-light-2">
+            {book.book}
+            <span className={`ml-1 px-0.5 rounded text-white text-xs md:px-2 md:py-1 md:text-sm ${getFormatButtonStyle(book.format)}`}>
+              {book.format}
+            </span>
+          </a>
           <button className="text-brand-2">
             <HeartIcon className="h-5 w-5" />
           </button>

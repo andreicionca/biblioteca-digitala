@@ -18,6 +18,23 @@ export async function getBooks(page = 1, limit = 3) {
   return { books: data, totalCount: count };
 }
 
+export async function getBooksByDate(page = 1, limit = 3) {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from("books")
+    .select("*", { count: "exact" })
+    .order('upload_date', { ascending: false }) 
+    .range(from, to);
+
+  if (error) {
+    console.error("Error fetching books:", error);
+    return { books: [], totalCount: 0 };
+  }
+
+  return { books: data, totalCount: count };
+}
 
 
 export async function getCategories() {

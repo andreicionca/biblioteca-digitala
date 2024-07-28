@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { getBooks} from "../services/books";
+import { getBooksByDate } from "../services/books";
 import Book from "../components/common/Book";
 import '../index.css';
 
@@ -17,7 +17,7 @@ function Home() {
     setLoading(true);
 
     try {
-      const { books: newBooks, totalCount } = await getBooks(pageRef.current);
+      const { books: newBooks, totalCount } = await getBooksByDate(pageRef.current);
       setBooks(prevBooks => {
         const uniqueBooks = newBooks.filter(newBook => 
           !prevBooks.some(prevBook => prevBook.id === newBook.id)
@@ -36,7 +36,7 @@ function Home() {
       setLoading(false);
       loadingRef.current = false;
     }
-  }, [hasMore,books.length]);
+  }, [hasMore, books.length]);
 
   useEffect(() => {
     fetchBooks();
@@ -61,19 +61,17 @@ function Home() {
 
   return (
     <div className="pb-16 overflow-x-hidden">
-      
       <h1 className="pt-2 text-3xl md:text-6xl font-bold mb-4 text-light-3 text-center">
-      Bun venit la <span className="relative inline-block mx-2">
-        <span className="gradient-text blur-effect">testformieffesct</span>
-        <span className="clear-text">biblioteca ta</span>
-      </span> digitală!
-    </h1>
-    <h1 className="text-2xl md:text-3xl font-bold mb-4 text-light-2 text-center">Descoperă un univers de cunoștințe și aventuri la un click distanță. </h1>
-    <p className="text-lg md:text-xl lg:text-2xl text-light-1 text-center mb-8">
-      Aici vei găsi peste 20 000 de cărți în format electronic, gata să fie explorate. Fie că ești pasionat de ficțiune, non-ficțiune, 
-      știință sau artă, avem ceva pentru fiecare.
-    </p>
-    
+        Bun venit la <span className="relative inline-block mx-2">
+          <span className="gradient-text blur-effect">biblioteca ta</span>
+          <span className="clear-text">digitală!</span>
+        </span>
+      </h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-light-2 text-center">Descoperă un univers de cunoștințe și aventuri la un click distanță. </h1>
+      <p className="text-lg md:text-xl lg:text-2xl text-light-1 text-center mb-8">
+        Aici vei găsi peste 20 000 de cărți în format electronic, gata să fie explorate. Fie că ești pasionat de ficțiune, non-ficțiune, 
+        știință sau artă, avem ceva pentru fiecare.
+      </p>
       <div>
         {books.map((book) => (
           <Book key={book.id} book={book} />
