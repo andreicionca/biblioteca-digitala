@@ -63,9 +63,9 @@ function Home() {
     <div className="pb-16 overflow-x-hidden">
       <h1 className="pt-2 text-3xl md:text-6xl font-bold mb-4 text-light-3 text-center">
         Bun venit la <span className="relative inline-block mx-2">
-          <span className="gradient-text blur-effect">biblioteca ta</span>
-          <span className="clear-text">digitală!</span>
-        </span>
+          <span className="gradient-text blur-effect">testformieffesct</span>
+          <span className="clear-text">biblioteca ta</span>
+        </span>digitală!
       </h1>
       <h1 className="text-2xl md:text-3xl font-bold mb-4 text-light-2 text-center">Descoperă un univers de cunoștințe și aventuri la un click distanță. </h1>
       <p className="text-lg md:text-xl lg:text-2xl text-light-1 text-center mb-8">
