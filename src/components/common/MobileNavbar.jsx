@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   HomeIcon,
   UserIcon,
@@ -6,25 +6,17 @@ import {
   BookOpenIcon,
   LightBulbIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../../assets/logo.png";
+import Header from "./Header";
 
 function MobileNavbar() {
   const location = useLocation();
+  // reomove header from categories page and search page
+
+  const showHeader = !location.pathname.includes("/categories/") && !location.pathname.includes("/search");
 
   return (
     <div className="md:hidden">
-      {location.pathname !== "/search" && (
-        <nav className="fixed top-0 left-0 z-50 bg-dark-1 w-full p-3 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Link to="/">
-              <img src={logo} alt="Logo" className="h-6 w-6" />
-            </Link>
-            <Link to="/">
-              <span className="text-base font-extrabold">Biblioteca digitală</span>
-            </Link>
-          </div>
-        </nav>
-      )}
+      {showHeader && <Header />}
       <div className="fixed bottom-0 left-0 w-full bg-dark-1 text-light-2 shadow-lg z-50">
         <div className="flex justify-around py-2">
           <NavLink to="/" className="flex flex-col items-center p-2">
@@ -89,9 +81,7 @@ function MobileNavbar() {
           </NavLink>
         </div>
       </div>
-      {location.pathname !== "/search" && (
-      <div className="pt-10">
-      </div>)}
+      {showHeader && <div className="pt-10"></div>}
     </div>
   );
 }
