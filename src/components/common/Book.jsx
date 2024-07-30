@@ -77,7 +77,7 @@ function Book({ book }) {
               {book.format}
             </span>
           </a>
-          <button className="text-brand-2">
+          <button className="text-light-2 hover:text-light-3">
             <HeartIcon className="h-5 w-5" />
           </button>
         </div>
@@ -87,7 +87,7 @@ function Book({ book }) {
             href={book.link_download}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-brand-1 text-dark-2 px-2 py-1 rounded hover:bg-brand-2 hover:text-dark-2 text-center text-xs md:text-sm font-semibold"
+            className="bg-brand-1 text-dark-2 px-2 py-1 rounded hover:bg-brand-1-hover hover:text-slate-50 text-center text-xs md:text-sm font-semibold"
           >
             Descarcă
           </a>

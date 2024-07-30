@@ -4,7 +4,9 @@
 
 :root {
   --color-brand--1: #8ACA7A;
+  --color-brand--1--hover: #6F9E6E;
   --color-brand--2: #FCD34D;
+  --color-brand--2--hover: #F9C74F;
 
   --color-dark--0: #1C212B;
   --color-dark--1: #2A303C;

@@ -21,7 +21,7 @@ function Categories() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mb-4 text-center text-light-3 pb-2 md:pb-4">Categorii</h1>
+      <h1 className="text-4xl font-bold mb-4 text-center text-light-3 pb-2 md:pb-4">CATEGORII</h1>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div
           className="border p-1 h-20 flex items-center justify-center rounded-lg shadow-md cursor-pointer bg-brand-2"

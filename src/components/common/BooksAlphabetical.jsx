@@ -83,7 +83,7 @@ function BooksAlphabetical({ category }) {
         {letters.map((letter) => (
           <div
             key={letter}
-            className={`border rounded-full px-2 py-1 m-1 cursor-pointer transition-all text-xxs md:text-base ${
+            className={`border rounded-full px-2 py-1 m-1 md:px-3 md:py-1  cursor-pointer transition-all text-xxs md:text-base ${
               selectedLetter === letter ? 'bg-brand-1 text-dark-2' : 'bg-light-1 text-light-3 hover:bg-light-2'
             }`}
             onClick={() => handleLetterClick(letter)}
@@ -92,7 +92,7 @@ function BooksAlphabetical({ category }) {
           </div>
         ))}
       </div>
-      <p className="text-center text-sm md:text-lg mb-2 md:mb-4">{totalCount} rezultate care încep cu litera {selectedLetter}</p>
+      <p className="text-center text-sm md:text-lg mb-2 md:mb-4">{totalCount} rezultate care încep cu litera <span className="text-brand-1 ">{selectedLetter}</span></p>
       {error && <p className="text-center text-red-500">{error}</p>}
       <div>
         {books.length > 0 ? (
