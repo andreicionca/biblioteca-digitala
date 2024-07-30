@@ -82,7 +82,10 @@ function Book({ book }) {
           </button>
         </div>
         {/* Row 2 */}
-        <div className="flex justify-end">
+        <div className="flex justify-between items-center">
+        <p className="text-xxs md:text-md lg:text-lg text-light-1 w-1/2">
+            {book.categories}
+          </p>
           <a
             href={book.link_download}
             target="_blank"
@@ -101,6 +104,7 @@ Book.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.number.isRequired,
     book: PropTypes.string.isRequired,
+    categories: PropTypes.string.isRequired,
     format: PropTypes.string.isRequired,
     link_download: PropTypes.string.isRequired,
     link_view: PropTypes.string.isRequired,

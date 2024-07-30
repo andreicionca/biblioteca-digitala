@@ -38,19 +38,31 @@ export async function getBooksByDate(page = 1, limit = 3) {
   return { books: data, totalCount: count };
 }
 
-// Obține toate categoriile unice
+// // Obține toate categoriile unice:  are probleme 
+// export async function getCategories() {
+//   const { data, error } = await supabase
+//     .from("books")
+//     .select("categories")
+
+//   if (error) {
+//     console.error("Error fetching categories:", error);
+//     return [];
+//   }
+
+//   const uniqueCategories = [...new Set(data.map((item) => item.categories))];
+//   return uniqueCategories;
+// }
+
+// Obține toate categoriile unice folosind RPC
 export async function getCategories() {
-  const { data, error } = await supabase
-    .from("books")
-    .select("categories");
+  const { data, error } = await supabase.rpc('get_unique_categories');
 
   if (error) {
     console.error("Error fetching categories:", error);
     return [];
   }
 
-  const uniqueCategories = [...new Set(data.map((item) => item.categories))];
-  return uniqueCategories;
+  return data || []; // Returnăm direct array-ul JSON sau un array gol în caz de eroare
 }
 
 // Obține cărțile după categorie, sortate alfabetic după book
@@ -120,7 +132,7 @@ export async function searchBooks(query) {
   const { data, error } = await supabase
     .from("books")
     .select("*")
-    .ilike('book', `%${query}%`);
+    .ilike('book', `%${query}%`)
 
   if (error) {
     console.error("Error searching books:", error);
@@ -129,3 +141,4 @@ export async function searchBooks(query) {
 
   return data;
 }
+
