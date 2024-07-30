@@ -83,7 +83,7 @@ function Book({ book }) {
         </div>
         {/* Row 2 */}
         <div className="flex justify-between items-center">
-        <p className="text-xxs md:text-md lg:text-lg text-light-1 w-1/2">
+        <p className="text-xs md:text-md lg:text-lg text-light-1 w-1/2">
             {book.categories}
           </p>
           <a
