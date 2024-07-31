@@ -85,6 +85,26 @@ export async function getBooksByCategory(category, page = 1, limit = 3) {
   return { books: data, totalCount: count };
 }
 
+// Obține cele mai noi cărți pentru o categorie specifică
+export async function getNewBooksByCategory(category, page = 1, limit = 3) {
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
+    .from("books")
+    .select("*", { count: "exact" })
+    .eq('categories', category)
+    .order('upload_date', { ascending: false })
+    .range(from, to);
+
+  if (error) {
+    console.error("Error fetching new books by category:", error);
+    return { books: [], totalCount: 0 };
+  }
+
+  return { books: data, totalCount: count };
+}
+
 
 // Obține cărțile după literă și categorie
 export async function getBooksByCategoryAndLetter(category, letter, page = 1, limit = 3) {

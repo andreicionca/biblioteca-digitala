@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import PropTypes from 'prop-types';
-import { getBooksByCategoryAndLetter, getBooksAlphabetical } from "../../services/books";
+import { getBooksByCategoryAndLetter, getBooksAlphabetical, getNewBooksByCategory } from "../../services/books";
 import Book from "./Book";
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 function BooksAlphabetical({ category }) {
   const [books, setBooks] = useState([]);
-  const [selectedLetter, setSelectedLetter] = useState("A");  // Selectăm implicit litera "A"
+  const [selectedLetter, setSelectedLetter] = useState(category === 'Alfabetic' ? "A" : "Noutăți");
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,11 @@ function BooksAlphabetical({ category }) {
     try {
       let fetchedBooks;
       let count;
-      if (category === 'Alfabetic') {
+      if (selectedLetter === "Noutăți") {
+        const { books: newBooks, totalCount } = await getNewBooksByCategory(category, pageRef.current, 20);
+        fetchedBooks = newBooks;
+        count = totalCount;
+      } else if (category === 'Alfabetic') {
         const { books: newBooks, totalCount } = await getBooksAlphabetical(selectedLetter, pageRef.current);
         fetchedBooks = newBooks;
         count = totalCount;
@@ -35,7 +39,7 @@ function BooksAlphabetical({ category }) {
 
       setBooks(prevBooks => reset ? fetchedBooks : [...prevBooks, ...fetchedBooks]);
       setTotalCount(count);
-      if (pageRef.current * 3 >= count) {
+      if (pageRef.current * 20 >= count) {
         setHasMore(false);
       }
       pageRef.current += 1;
@@ -80,6 +84,16 @@ function BooksAlphabetical({ category }) {
   return (
     <div className="px-2 py-1 md:px-4  md:py-2">
       <div className="flex flex-wrap justify-center mb-1 md:mb-4">
+        {category !== 'Alfabetic' && (
+          <div
+            className={`border rounded-full px-2 py-1 m-1 md:px-3 md:py-1 cursor-pointer transition-all text-xxs md:text-base ${
+              selectedLetter === "Noutăți" ? 'bg-brand-3 text-dark-2' : 'bg-light-1 text-light-3 hover:bg-light-2'
+            }`}
+            onClick={() => handleLetterClick("Noutăți")}
+          >
+            Noutăți
+          </div>
+        )}
         {letters.map((letter) => (
           <div
             key={letter}
@@ -92,7 +106,7 @@ function BooksAlphabetical({ category }) {
           </div>
         ))}
       </div>
-      <p className="text-center text-sm md:text-lg mb-2 md:mb-4">{totalCount} rezultate care încep cu litera <span className="text-brand-1 ">{selectedLetter}</span></p>
+      <p className="text-center text-sm md:text-lg mb-2 md:mb-4">{selectedLetter === "Noutăți" ? "Ultimele cărți adăugate..." : `${totalCount} rezultate care încep cu litera ${selectedLetter}`}</p>
       {error && <p className="text-center text-red-500">{error}</p>}
       <div>
         {books.length > 0 ? (
@@ -100,11 +114,11 @@ function BooksAlphabetical({ category }) {
             <Book key={book.id} book={book} />
           ))
         ) : (
-          !loading && <p className="text-center">Nu există cărți pentru litera selectată.</p>
+          !loading && <p className="text-center">Nu există cărți {selectedLetter === "Noutăți" ? "noi adăugate" : `pentru litera ${selectedLetter}` }.</p>
         )}
       </div>
       {loading && <p className="text-center">Încărcare...</p>}
-      {!hasMore && books.length > 0 && <p className="text-center">Toate cărțile au fost încărcate.</p>}
+      {!hasMore && books.length > 0 && <p className="text-center">Toate cărțile {selectedLetter === "Noutăți" ? "noi" : ""} au fost încărcate.</p>}
     </div>
   );
 }

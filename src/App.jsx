@@ -8,6 +8,8 @@ import CategoryBooks from "./pages/CategoryBooks";
 import Navbar from "./components/common/Navbar";
 import MobileNavbar from "./components/common/MobileNavbar";
 
+
+
 function App() {
   return (
     <Router>

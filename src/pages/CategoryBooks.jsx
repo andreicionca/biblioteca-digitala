@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import BooksAlphabetical from "../components/common/BooksAlphabetical";
+import BooksNew from '../components/common/BooksNew';
 import '../index.css';
 
 function CategoryBooks() {
@@ -17,7 +18,9 @@ function CategoryBooks() {
       <h1 className="text-lg md:text-4xl md:pb-2 font-bold text-light-3 text-center">
         {category === "Alfabetic" ? "Toate cărțile în ordine alfabetică" : `${category}`}
       </h1>
-      <BooksAlphabetical category={category} />
+     
+      {category === "Ultimele cărți adăugate..." ? <BooksNew /> : <BooksAlphabetical category={category} />}
+
     </div>
   );
 }
