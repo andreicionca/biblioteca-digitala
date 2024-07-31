@@ -19,7 +19,7 @@ function CategoryBooks() {
         {category === "Alfabetic" ? "Toate cărțile în ordine alfabetică" : `${category}`}
       </h1>
      
-      {category === "Ultimele cărți adăugate..." ? <BooksNew /> : <BooksAlphabetical category={category} />}
+      {category === "Ultimele cărți adăugate" ? <BooksNew /> : <BooksAlphabetical category={category} />}
 
     </div>
   );

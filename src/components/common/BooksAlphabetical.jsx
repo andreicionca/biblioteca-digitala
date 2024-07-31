@@ -82,11 +82,11 @@ function BooksAlphabetical({ category }) {
   };
 
   return (
-    <div className="px-2 py-1 md:px-4  md:py-2">
-      <div className="flex flex-wrap justify-center mb-1 md:mb-4">
+    <div className=" px-2 py-1 md:px-2  md:py-2">
+      <div className=" flex flex-wrap justify-center mb-1 md:mb-4 ">
         {category !== 'Alfabetic' && (
           <div
-            className={`border rounded-full px-2 py-1 m-1 md:px-3 md:py-1 cursor-pointer transition-all text-xxs md:text-base ${
+            className={`border rounded-full px-2 py-1 m-1 md:px-2 md:py-1 cursor-pointer transition-all text-xxs md:text-base ${
               selectedLetter === "Noutăți" ? 'bg-brand-3 text-dark-2' : 'bg-light-1 text-light-3 hover:bg-light-2'
             }`}
             onClick={() => handleLetterClick("Noutăți")}
@@ -106,7 +106,7 @@ function BooksAlphabetical({ category }) {
           </div>
         ))}
       </div>
-      <p className="text-center text-sm md:text-lg mb-2 md:mb-4">{selectedLetter === "Noutăți" ? "Ultimele cărți adăugate..." : `${totalCount} rezultate care încep cu litera ${selectedLetter}`}</p>
+      <p className="text-center text-sm md:text-lg mt-2 md:mb-4">{selectedLetter === "Noutăți" ? "Ultimele cărți adăugate" : `${totalCount} rezultate care încep cu litera ${selectedLetter}`}</p>
       {error && <p className="text-center text-red-500">{error}</p>}
       <div>
         {books.length > 0 ? (

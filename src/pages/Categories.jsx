@@ -26,7 +26,7 @@ function Categories() {
       
         <div
           className="border p-1 h-20 flex items-center justify-center rounded-lg shadow-md cursor-pointer bg-brand-3"
-          onClick={() => handleCategoryClick('Ultimele cărți adăugate...')} 
+          onClick={() => handleCategoryClick('Ultimele cărți adăugate')} 
         >
           <h2 className="text-base md:text-2xl font-semibold mb-2 text-center text-dark-1">Noutăți</h2>
         </div>
