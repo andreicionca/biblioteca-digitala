@@ -24,22 +24,23 @@ function BooksAlphabetical({ category }) {
       let fetchedBooks;
       let count;
       if (selectedLetter === "Noutăți") {
-        const { books: newBooks, totalCount } = await getNewBooksByCategory(category, pageRef.current, 20);
+        const { books: newBooks, totalCount } = await getNewBooksByCategory(category, pageRef.current, 3);
         fetchedBooks = newBooks;
         count = totalCount;
       } else if (category === 'Alfabetic') {
-        const { books: newBooks, totalCount } = await getBooksAlphabetical(selectedLetter, pageRef.current);
+        const { books: newBooks, totalCount } = await getBooksAlphabetical(selectedLetter, pageRef.current, 3);
         fetchedBooks = newBooks;
         count = totalCount;
       } else {
-        const { books: newBooks, totalCount } = await getBooksByCategoryAndLetter(category, selectedLetter, pageRef.current);
+        const { books: newBooks, totalCount } = await getBooksByCategoryAndLetter(category, selectedLetter, pageRef.current, 3);
         fetchedBooks = newBooks;
         count = totalCount;
       }
 
+
       setBooks(prevBooks => reset ? fetchedBooks : [...prevBooks, ...fetchedBooks]);
       setTotalCount(count);
-      if (pageRef.current * 20 >= count) {
+      if ((pageRef.current - 1) * 3 + fetchedBooks.length >= count) {
         setHasMore(false);
       }
       pageRef.current += 1;
@@ -74,16 +75,19 @@ function BooksAlphabetical({ category }) {
   }, [handleScroll]);
 
   const handleLetterClick = (letter) => {
+    console.log("Letter clicked:", letter);
     setSelectedLetter(letter);
     setBooks([]); // Resetăm starea cărților
     pageRef.current = 1; // Resetăm pagina curentă
     setHasMore(true); // Resetăm starea hasMore
     setTotalCount(0); // Resetăm numărul total de rezultate
+    setLoading(false); // Resetăm starea loading
+    loadingRef.current = false; // Resetăm loadingRef
   };
 
   return (
-    <div className=" px-2 py-1 md:px-2  md:py-2">
-      <div className=" flex flex-wrap justify-center mb-1 md:mb-4 ">
+    <div className="px-2 py-1 md:px-2 md:py-2">
+      <div className="flex flex-wrap justify-center mb-1 md:mb-4">
         {category !== 'Alfabetic' && (
           <div
             className={`border rounded-full px-2 py-1 m-1 md:px-2 md:py-1 cursor-pointer transition-all text-xxs md:text-base ${
@@ -97,7 +101,7 @@ function BooksAlphabetical({ category }) {
         {letters.map((letter) => (
           <div
             key={letter}
-            className={`border rounded-full px-2 py-1 m-1 md:px-3 md:py-1  cursor-pointer transition-all text-xxs md:text-base ${
+            className={`border rounded-full px-2 py-1 m-1 md:px-3 md:py-1 cursor-pointer transition-all text-xxs md:text-base ${
               selectedLetter === letter ? 'bg-brand-1 text-dark-2' : 'bg-light-1 text-light-3 hover:bg-light-2'
             }`}
             onClick={() => handleLetterClick(letter)}
