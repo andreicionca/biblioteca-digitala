@@ -9,7 +9,7 @@ function Navbar() {
       <img src={logo} alt="Logo" className="h-12 w-12" />
         </Link>
        <Link to="/">
-        <span className="text-2xl font-extrabold">Biblioteca digitală</span>
+        <span className="text-2xl font-extrabold ">Biblioteca digitală</span>
         </Link>
       </div>
       <div className="flex space-x-4">
@@ -21,6 +21,12 @@ function Navbar() {
         </Link>
         <Link to="/search" className="hover:text-brand-1 font-semibold">
           Căutare cărți
+        </Link>
+        <Link to="/suggestions" className="hover:text-brand-1 font-semibold">
+          Sugestii
+        </Link>
+        <Link to="/profile" className="hover:text-brand-1 font-semibold">
+          Profil
         </Link>
       </div>
     </nav>

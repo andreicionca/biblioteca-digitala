@@ -71,9 +71,9 @@ function MobileNavbar() {
             {({ isActive }) => (
               <>
                 <UserIcon
-                  className={`h-4 w-4 ${isActive ? "text-brand-1 fill-current" : "text-brand-2"}`}
+                  className={`h-4 w-4 ${isActive ? "text-brand-1 fill-current" : "text-brand-4"}`}
                 />
-                <span className={`text-sm ${isActive ? "text-brand-1" : "text-brand-2"}`}>
+                <span className={`text-sm ${isActive ? "text-brand-1" : "text-brand-4"}`}>
                   Profil
                 </span>
               </>

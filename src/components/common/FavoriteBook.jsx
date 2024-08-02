@@ -1,61 +1,14 @@
 import PropTypes from 'prop-types';
-import { HeartIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { useState, useEffect, useRef } from 'react';
-import supabase from '../../supabaseClient';
-import { useAuth } from '../../context/auth';
+import { XMarkIcon } from '@heroicons/react/24/outline'; // folosim XMarkIcon
 
-function Book({ book }) {
+const FavoriteBook = ({ book, onRemoveFavorite }) => {
   const [imageError, setImageError] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const imgRef = useRef();
-  const { user } = useAuth();
 
   const handleImageError = () => {
     setImageError(true);
   };
-
-  const checkIfFavorite = async () => {
-    if (user) {
-      const { data, error } = await supabase
-        .from('favoritebooks')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('book_id', book.id);
-      
-      if (!error && data.length > 0) {
-        setIsFavorite(true);
-      }
-    }
-  };
-
-  const handleFavorite = async () => {
-    if (user) {
-      if (isFavorite) {
-        const { error } = await supabase
-          .from('favoritebooks')
-          .delete()
-          .eq('user_id', user.id)
-          .eq('book_id', book.id);
-        if (error) {
-          console.error('Error removing favorite book:', error);
-        } else {
-          setIsFavorite(false);
-        }
-      } else {
-        const { error } = await supabase.from('favoritebooks').insert([{ user_id: user.id, book_id: book.id }]);
-        if (error) {
-          console.error('Error adding favorite book:', error);
-        } else {
-          setIsFavorite(true);
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    checkIfFavorite();
-  }, [user]);
 
   useEffect(() => {
     const imgElement = imgRef.current;
@@ -123,8 +76,8 @@ function Book({ book }) {
               {book.format}
             </span>
           </a>
-          <button onClick={handleFavorite} className="text-light-2 hover:text-light-3">
-            {isFavorite ? <HeartIconSolid className="h-5 w-5 text-brand-2" /> : <HeartIcon className="h-5 w-5" />}
+          <button onClick={() => onRemoveFavorite(book.id)} className="text-light-2 hover:text-light-3">
+            <XMarkIcon className="h-5 w-5 text-red-500" />
           </button>
         </div>
         <div className="flex justify-between items-center">
@@ -145,7 +98,7 @@ function Book({ book }) {
   );
 }
 
-Book.propTypes = {
+FavoriteBook.propTypes = {
   book: PropTypes.shape({
     id: PropTypes.number.isRequired,
     book: PropTypes.string.isRequired,
@@ -155,6 +108,7 @@ Book.propTypes = {
     link_view: PropTypes.string.isRequired,
     id_cover: PropTypes.string.isRequired,
   }).isRequired,
+  onRemoveFavorite: PropTypes.func.isRequired,
 };
 
-export default Book;
+export default FavoriteBook;

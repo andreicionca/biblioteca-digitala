@@ -1,16 +1,16 @@
-import { createContext, useContext } from "react";
-
-const AuthContext = createContext();
+import PropTypes from 'prop-types';
+import { AuthContext, useAuthProvider } from './auth';
 
 export const AuthProvider = ({ children }) => {
+  const auth = useAuthProvider();
+
   return (
-    <div>
-      <p>Autentificare dezactivată temporar.</p>
+    <AuthContext.Provider value={auth}>
       {children}
-    </div>
+    </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
