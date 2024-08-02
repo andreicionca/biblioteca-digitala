@@ -67,14 +67,14 @@ function Profile() {
             Bine ai venit la Biblioteca digitală! Pe această platformă te poți bucura de accesul rapid și ușor la mii de cărți în format electronic, disponibile pentru a fi descărcate și citite oricând și oriunde. În pagina de profil, poți regăsi titlurile salvate ca favorite pentru a le accesa rapid și ușor.
           </p>
           <p className="text-light-1 mt-4 md:text-xl ">Te rog să reții că toate cărțile disponibile pe această platformă sunt destinate exclusiv uzului personal. Este interzisă vânzarea sau distribuirea acestora. Respectarea drepturilor de autor este esențială pentru a evita sancțiunile legale.</p>
-          <h2 className="text-xl md:text-4xl md:pt-8 gradient-text font-semibold mt-3">Cărți favorite</h2>
+         
+          <h2 className="text-xl text-center md:text-4xl md:pt-8 gradient-text font-semibold mt-3">Cărți favorite</h2>
           {favoriteBooks.length > 0 ? (
             favoriteBooks.map((item) => (
               <FavoriteBook key={item.books.id} book={item.books} onRemoveFavorite={handleRemoveFavorite} />
             ))
           ) : (
-            <p className="text-light-2 md:text-lg mt-2">Nu ai nicio carte la favorite. Poți adăuga cărți la favorite accesând detaliile cărților și apăsând pe simbolul ♡ 
-.</p>
+            <p className="text-light-2 md:text-center md:text-lg mt-2">Nu ai nicio carte la favorite. Poți adăuga cărți la favorite accesând detaliile cărților și apăsând pe simbolul ♡ .</p>
           )}
         </div>
       )}
