@@ -55,7 +55,7 @@ function Search() {
           placeholder="Caută cărți, autori..."
           value={displayTerm}
           onChange={handleInputChange}
-          className="border border-gray-300 rounded p-2 w-full max-w-lg focus:outline-none focus:ring focus:border-blue-300"
+          className="border border-gray-300 rounded p-2 w-full max-w-lg focus:outline-none focus:ring focus:border-blue-300 text-dark-1"
         />
       </div>
       {searchTerm.length >= 3 && (
