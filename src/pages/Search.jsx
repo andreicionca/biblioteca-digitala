@@ -8,7 +8,11 @@ const replaceDiacritics = (str) => {
     .replace(/ă|â/g, 'a')
     .replace(/î/g, 'i')
     .replace(/ș/g, 's')
-    .replace(/ț/g, 't');
+    .replace(/ț/g, 't')
+    .replace(/Ă|Â/g, 'A')
+    .replace(/Î/g, 'I')
+    .replace(/Ș/g, 'S')
+    .replace(/Ț/g, 'T');
 };
 
 function Search() {
@@ -55,7 +59,7 @@ function Search() {
           placeholder="Caută cărți, autori..."
           value={displayTerm}
           onChange={handleInputChange}
-          className="border border-gray-300 rounded p-2 w-full max-w-lg focus:outline-none focus:ring focus:border-blue-300 text-dark-1"
+          className="border border-gray-300 rounded p-2 w-full max-w-lg focus:outline-none focus:ring focus:border-blue-300 text-dark-2"
         />
       </div>
       {searchTerm.length >= 3 && (
